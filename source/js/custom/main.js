@@ -47,43 +47,24 @@ document.addEventListener("DOMContentLoaded", function(){
 
 			update_metadata: function(){
 
-				this.progressbar_el.rangeSlider.update({
-					max: this.video_el.duration
-				});
 				this.duration(this.video_el.duration);
 				this.current_time(0);
 			},
 
 			can_play: ko.observable(false),
 			is_playing: ko.observable(false),
-			volume: ko.observable(1),
+			volume: ko.observable(100),
 			muted: ko.observable(false),
 			current_time: ko.observable(0),
 			duration: ko.observable(0),
-			time_string: ko.observable('')
+			time_string: ko.observable(''),
+
+			current_percentage:  ko.observable(0)
 		},
 
 		init: function(){
 			var player = vm.player,
 				video = document.querySelector('#tt_player');
-
-			player.progressbar_el = document.querySelector('#tt_progressbar');
-			rangeSlider.create(player.progressbar_el, {
-				polyfill: true,
-				rangeClass: 'TT__range TT__range_progressbar',
-				fillClass: 'TT__range-fill',
-				bufferClass: 'TT__range-buffer disabled',
-				handleClass: 'TT__range-handle',
-				min: 0,
-				max: 100,
-				onInit: function () {},
-				onSlide: function (position, value) {
-					// player.video_el.currentTime = position; //TODO bug
-				},
-				onSlideEnd: function (position, value) {
-					player.video_el.currentTime = position;
-				}
-			});
 
 			player.video_el = video;
 
@@ -107,10 +88,10 @@ document.addEventListener("DOMContentLoaded", function(){
 			video.addEventListener('timeupdate', function(){
 				player.current_time(video.currentTime);
 				player.time_string(tt_helpers.get_time_string(player.current_time()) + '/ ' + tt_helpers.get_time_string(player.duration()));
+				player.current_percentage(+(player.current_time()/(player.duration()/100)).toFixed(2));
 			});
 
 			video.addEventListener('seeking', function(){
-				player.progressbar_el.rangeSlider.update({value: video.currentTime});
 				player.current_time(video.currentTime);
 			});
 
@@ -123,29 +104,64 @@ document.addEventListener("DOMContentLoaded", function(){
 				player.reset();
 			}, null, "beforeChange");
 
-			this.currentVideo.subscribe(function(){
-				player.progressbar_el.rangeSlider.update({max: video.duration});
-			});
+			function init_ranger(options){
 
-			player.volumebar_el = document.querySelector('#tt_volumebar');
+				var ranger = document.querySelector(options.id);
 
-			rangeSlider.create(player.volumebar_el, {
-				polyfill: true,
-				rangeClass: 'TT__range TT__range_volumebar',
-				fillClass: 'TT__range-fill',
-				bufferClass: 'TT__range-buffer disabled',
-				handleClass: 'TT__range-handle',
-				min: 0,
-				max: 1,
-				step: 0.1,
-				onInit: function () {},
-				onSlideEnd: function (position, value) {
-					player.video_el.volume = value;
+				var dragging = false,
+					new_value = 0;
+
+				var	ranger_width = parseInt(getComputedStyle(ranger).width),
+					ranger_position = ranger.getBoundingClientRect().x,
+					drag_start = 0;
+
+				function update_metadata(obs,val){
+					if(options.media_param === 'time'){
+						obs(val);
+						options.media.currentTime = (video.duration/100) * val;
+					}
+					else if(options.media_param === 'volume'){
+						obs(val);
+						options.media.volume = options.observable()/100;
+					}
 				}
-			});
 
-			video.addEventListener('volumechange', function(){
-				player.volume(video.volume);
+				ranger.addEventListener('mousedown', function(e){
+					dragging = true;
+					drag_start = e.clientX;
+					new_value = e.clientX - ranger_position;
+					update_metadata(options.observable, new_value/(ranger_width/100));
+				});
+				document.addEventListener('mouseup', function(e){
+					if(dragging) dragging = false;
+				});
+
+				document.addEventListener('mousemove', function(e){
+					if(dragging){
+						var new_value = e.clientX - ranger_position;
+						if(new_value < 0) new_value = 0;
+						else if(new_value > ranger_width) new_value = ranger_width;
+
+						update_metadata(options.observable, new_value/(ranger_width/100));
+					}
+				});
+
+				window.addEventListener('resize', function(){
+					ranger_position = ranger.getBoundingClientRect().x;
+				});
+			}
+
+			init_ranger({
+				id: '#tt_progressbar_range',
+				observable: player.current_percentage,
+				media: video,
+				media_param: 'time'
+			});
+			init_ranger({
+				id: '#tt_volumebar_range',
+				observable: player.volume,
+				media: video,
+				media_param: 'volume'
 			});
 		}
 	};
