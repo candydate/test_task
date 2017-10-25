@@ -1,0 +1,74 @@
+.TT__card {
+
+  float: right;
+  padding: 20px 0 35px;
+
+  width: 23.404%; /*220px on 940 layout*/
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: @border_color_grey;
+
+  color: @color_blue;
+  font: @font_text;
+
+  .TT__card-photo	{
+	display: block;
+	width: 120px;
+	height: 120px;
+	margin: 0 auto 14px;
+  }
+
+  .TT__card-title {
+	display: block;
+	padding: 0 20px 21px 20px;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: -.5px;
+
+	font: @font_title;
+	font-style: italic;
+	font-weight: 700;
+  }
+
+  .TT__card-row {
+	padding: 0 20px 9px;
+	text-align: center;
+
+	b {
+	  font-weight: 700;
+	}
+
+	a {
+	  text-decoration: underline;
+	  color: @color_blue;
+	  line-height: 20px;
+	}
+  }
+
+  .TT__card-text {
+	margin-top: 20px;
+	padding: 25px 20px 0;
+
+	font: @font_text;
+	line-height: 21px;
+	text-align: center;
+	color:  @color_blue_dark;
+
+	position: relative;
+
+	&:before {
+	  display: block;
+	  height: 1px;
+	  background: @border_color_grey;
+
+	  position: absolute;
+	  left: 20px;
+	  right: 20px;
+	  top: 0;
+
+	  content: '';
+	}
+  }
+
+}

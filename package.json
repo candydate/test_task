@@ -1,0 +1,24 @@
+{
+  "name": "test_ortnec_2",
+  "version": "0.0.0",
+  "description": "test_ortnec_2",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "3.9.1",
+    "keygenerator": "^1.0.4",
+    "uid-generator": "^0.1.1"
+  },
+  "devDependencies": {
+    "gulp-clean-css": "2.0.3",
+    "gulp-concat": "2.6.0",
+    "gulp-imagemin": "2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-less": "3.0.5",
+    "gulp-newer": "1.1.0",
+    "gulp-uglify": "1.5.3",
+    "imagemin-optipng": "4.3.0",
+    "jshint": "^2.9.4",
+    "merge-stream": "1.0.0",
+    "optipng": "0.3.1"
+  }
+}

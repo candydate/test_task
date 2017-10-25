@@ -1,0 +1,53 @@
+.TT__range {
+  display: inline-block;
+  height: 12px;
+  //width: 200px;
+
+  &.TT__range_progressbar {
+	width: 120px;
+  }
+
+  &.TT__range_volumebar {
+	width: 50px;
+  }
+
+  position: relative;
+  cursor: pointer;
+
+  overflow: hidden;
+
+  &:before {
+	background: #dadee9;
+	height: 2px;
+	width: 100%;
+
+	position: absolute;
+	left: 0;
+	top: 5px;
+
+	content: '';
+  }
+
+  .TT__range-fill {
+	background: @color_blue;
+
+	position: absolute;
+	left: 0;
+	top: 5px;
+
+	height: 2px;
+  }
+
+  .TT__range-handle {
+	background: @color_blue;
+	width: 2px;
+	height: 10px;
+
+	position: absolute;
+	top: 1px;
+	left: 0;
+  }
+
+  .TT__range-buffer {}
+
+}

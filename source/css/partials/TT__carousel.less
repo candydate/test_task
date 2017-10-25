@@ -1,0 +1,125 @@
+.TT__carousel {
+  border-top: 1px solid;
+  border-color: @border_color_grey;
+  padding: 18px 0 40px;
+
+  position: relative;
+  z-index: 1;
+
+  .TT__carousel-title {
+	display: block;
+	padding-right: 20px;
+	background: #fff;
+
+	position: absolute;
+	left: 1px;
+	top: -14px;
+
+	font: @font_title;
+	color: @color_blue;
+	text-transform: uppercase;
+	letter-spacing: -.6px;
+
+	@media screen and (max-width: 940px) {
+	  padding-right: 0;
+	  text-align: center;
+	  width: 400px;
+	  left: 50%;
+	  margin-left: -200px;
+	}
+  }
+
+  .TT__carousel-thumbs {
+	overflow: auto;
+
+	.TT__carousel-thumbs-item {
+	  display: block;
+	  float: left;
+	  border-radius: 3px;
+
+	  margin: 20px 20px 0 0;
+	  width: 220px;
+
+	  cursor: pointer;
+
+	  &:nth-child(4n){
+		margin-right: 0;
+	  }
+
+	  .TT__carousel-thumb-image {
+		position: relative;
+
+		img {
+		  display: block;
+		  width: 220px;
+		  height: 165px;
+		}
+
+		.TT__carousel-thumb-link {
+		  display: block;
+		  width: 30px;
+		  height: 30px;
+		  border-radius: 50%;
+		  background: #fff;
+
+		  position: absolute;
+		  left: 11px;
+		  bottom: 20px;
+
+		  &:before {
+			position: absolute;
+			left: 0;
+			top: 8px;
+
+			width: 100%;
+			text-align: center;
+
+			.fa;
+
+			font-size: 18px;
+			color: @color_blue;
+			content: '';
+
+		  }
+
+		  &.facebook:before {
+			content:"\f09a";
+		  }
+		  &.twitter:before {
+			content:"\f099";
+		  }
+		  &.instagram:before {
+			content:"\f16d";
+		  }
+		}
+
+	  }
+
+	  span {
+		display: block;
+
+		padding-top: 12px;
+		font: @font_text;
+		color: @color_blue;
+		font-weight: 700;
+
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	  }
+	}
+
+	@media screen and (max-width: 940px) {
+
+	  text-align: center;
+
+	  .TT__carousel-thumbs-item {
+		float: none;
+		display: inline-block;
+		margin: 0 5px;
+		&:nth-child(4n){  margin: 0 5px;  }
+	  }
+	}
+
+  }
+}

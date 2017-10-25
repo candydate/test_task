@@ -1,0 +1,6 @@
+/git rm -r --cached .idea.idea/
+/node_modules/
+/public/css/
+/public/js/
+/public/img/
+/public/*.html

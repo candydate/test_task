@@ -1,0 +1,62 @@
+.TT__notification {
+  height: 55px;
+  border-radius: 3px;
+  background: @background_color_grey;
+
+  position: relative;
+  margin-bottom: 23px;
+
+  .TT__notification-text {
+	display: block;
+	float: left;
+	padding: 19px 0 0 20px;
+
+	font: @font_text;
+	font-weight: 700;
+	color: @color_blue;
+  }
+
+  .TT__notification-button {
+	display: block;
+	float: left;
+	margin: 10px 0 0 30px;
+
+	width: 130px;
+	height: 35px;
+	background: @background_color_blue;
+	border-radius: 3px;
+
+	font: @font_text;
+	color: @color_blue;
+	font-style: italic;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: -.5px;
+
+	cursor: pointer;
+
+	a {
+	  text-decoration: none;
+	  color: @color_blue;
+	  margin-left: -4px;
+
+	  &:focus, &:active {
+		border: none;
+		outline: none;
+	  }
+	}
+  }
+
+  .TT__notification-close {
+	position: absolute;
+	right: 20px;
+	top: 19px;
+
+	color: @color_blue;
+	font-size: 14px;
+	text-transform: uppercase;
+
+	cursor: pointer;
+  }
+
+}
