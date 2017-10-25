@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-	vm = {
+	var vm = {
 		newProfiles: {
 			amount: ko.observable(),
 			checkNowUrl: ko.observable('#')
@@ -125,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 			this.currentVideo.subscribe(function(){
 				player.progressbar_el.rangeSlider.update({max: video.duration});
-				console.log(video.duration);
 			});
 
 			player.volumebar_el = document.querySelector('#tt_volumebar');
